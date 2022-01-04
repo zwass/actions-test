@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Long running steps
         run: |
-          for i in ${1..100}; do
+          for i in {1..100}; do
             echo "Step $i"
           done
             
