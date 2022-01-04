@@ -18,5 +18,6 @@ jobs:
         run: |
           for i in {1..100}; do
             echo "Step $i"
+            sleep 10
           done
             
