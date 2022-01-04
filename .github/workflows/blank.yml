@@ -14,5 +14,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Run a one-line script
-        run: echo "running action"
+      - name: Long running steps
+        run: |
+          for i in ${1..100}; do
+            echo "Step $i"
+          done
+            
