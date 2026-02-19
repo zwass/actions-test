@@ -27,11 +27,7 @@ jobs:
             libvirt-daemon-system \
             libvirt-clients \
             libvirt-dev \
-            bridge-utils \
-            libxslt-dev \
-            libxml2-dev \
-            zlib1g-dev \
-            ruby-dev
+            bridge-utils
       
       - name: Cache Vagrant plugins
         uses: actions/cache@v4
