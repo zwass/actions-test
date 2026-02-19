@@ -50,6 +50,11 @@ jobs:
           newgrp libvirt
           vagrant plugin install vagrant-libvirt
 
+      - name: Run vagrant
+        run: |
+          newgrp libvirt
+          vagrant up
+
       - name: Setup upterm session
         uses: owenthereal/action-upterm@v1
         with:
