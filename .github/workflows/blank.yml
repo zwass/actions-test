@@ -16,14 +16,6 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - name: Cache Vagrant plugins
-        uses: actions/cache@v4
-        with:
-          path: ~/.vagrant.d
-          key: ${{ runner.os }}-vagrant-${{ hashFiles('**/Vagrantfile') }}
-          restore-keys: |
-            ${{ runner.os }}-vagrant-
-
       - name: Install dependencies
         run: |
           wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
@@ -41,6 +33,14 @@ jobs:
             zlib1g-dev \
             ruby-dev
       
+      - name: Cache Vagrant plugins
+        uses: actions/cache@v4
+        with:
+          path: ~/.vagrant.d
+          key: ${{ runner.os }}-vagrant-${{ hashFiles('**/Vagrantfile') }}
+          restore-keys: |
+            ${{ runner.os }}-vagrant-
+
       - name: Configure libvirt and install vagrant plugin
         run: |
           sudo systemctl enable --now libvirtd
@@ -48,11 +48,11 @@ jobs:
           sudo usermod -aG libvirt $USER
           sudo usermod -aG kvm $USER
           newgrp libvirt
+          sudo chmod 777 /var/run/libvirt/libvirt-sock
           vagrant plugin install vagrant-libvirt
 
-      - name: Run vagrant
+      - name: Run vagrant up
         run: |
-          newgrp libvirt
           vagrant up
 
       - name: Setup upterm session
