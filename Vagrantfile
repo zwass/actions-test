@@ -9,6 +9,6 @@ Vagrant.configure("2") do |config|
     lv.cpus = 16
     lv.memory = 16384
     lv.qemu_use_session = false
-    lv.management_network_address = "192.168.121.0/24"
+    lv.management_network_address = "192.168.121.0/24" # is this needed?
   end
 end
