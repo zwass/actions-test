@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: windows-latest
     steps:
       - name: Setup upterm session
         uses: owenthereal/action-upterm@v1
