@@ -4,15 +4,34 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  push:
   pull_request:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
-  build:
+  test-fail:
     runs-on: ubuntu-latest
+    timeout-minutes: 1
     steps:
       - name: Run a one-line script
-        run: echo "running action"
+        run: echo "running action" && exit 1
+      - name: always
+        if: always()
+        run: sleep 90 && echo "always action"
+      - name: always 2
+        if: always()
+        run: echo "always action 2"
+        
+  test-timeout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Run a one-line script
+        run: sleep 120 && echo "running action"
+      - name: always
+        if: always()
+        run: sleep 90 && echo "always action"
+      - name: always 2
+        if: always()
+        run: echo "always action 2"
